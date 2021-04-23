@@ -13,6 +13,7 @@ module.exports = {
             .set('utils', resolve('src/utils'))
     },
     devServer: {
+        host: '192.168.0.167',
         proxy: {
             '/api': {
                 target: 'http://192.168.0.129:8360', //对应自己的接口

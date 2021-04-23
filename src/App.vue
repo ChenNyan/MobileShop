@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-
-    <router-view/>
+    <keep-alive include="Main">
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 <script>
@@ -20,5 +21,7 @@ export default {
 </script>
 
 <style lang="less">
-
+.van-icon-like{
+  color: red !important;
+}
 </style>

@@ -1,14 +1,29 @@
 import axios from "axios";
+import {Toast} from "vant";
+import router from "@/router";
 export const request = (config)=>{
     const inst = axios.create({
         baseURL:'/api/v4',
         timeout:10000,
     })
-    inst.interceptors.response.use(config =>{
+    inst.interceptors.request.use(config =>{
+        Toast.loading({
+            message: '加载中...',
+            forbidClick: true,
+            loadingType: 'spinner',
+            duration: 0
+        });
+        config.headers.authorization=sessionStorage.getItem('token')
         return config
     })
     inst.interceptors.response.use(data => {
+        if(data.data.errcode === 90101){
+            router.push("/login")
+        }
+        Toast.clear()
         return data.data
     })
-    return inst(config)
+    return inst(config).catch(err=>{
+        Toast('请检查网络');
+    })
 }
