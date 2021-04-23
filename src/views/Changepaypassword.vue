@@ -33,7 +33,7 @@
 
 <script>
 import {changepaypassword} from "@/network/api";
-import {mapState} from "vuex"
+import {mapState,mapMutations} from "vuex"
 export default {
   ...mapState(['userInfo']),
   name: "Changepaypassword",
@@ -44,12 +44,14 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['clearAll']),
     async onSubmit(){
       const {errcode} = await changepaypassword(this.oldpassword,this.newpassword)
       if (errcode!==0) return this.$toast('修改失败')
-      this.$toast('修改成功')
-      this.$store.state.userInfo.pay_password=this.newpassword
-      this.$router.back()
+      this.$toast('修改成功，请重新登录')
+      sessionStorage.clear()
+      this.clearAll()
+      this.$router.push('/me')
     }
   }
 }
