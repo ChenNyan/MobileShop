@@ -12,6 +12,7 @@ Vue.use(VueJsonp)
 Vue.use(Vant);
 Vue.config.productionTip = false
 store.dispatch('getUserInfo')
+store.dispatch('getlocation')
 new Vue({
   router,
   store,

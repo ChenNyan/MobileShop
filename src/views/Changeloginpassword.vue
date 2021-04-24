@@ -50,8 +50,7 @@ export default {
       this.$toast('修改成功，请重新登录')
       sessionStorage.clear()
       this.clearAll()
-      this.$router.push('/me')
-
+      this.$router.replace('/me')
     }
   }
 }

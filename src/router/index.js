@@ -17,6 +17,8 @@ const Changeloginpassword=()=>import('../views/Changeloginpassword')
 const Changepaypassword=()=>import('../views/Changepaypassword')
 const Orderinfo=()=>import('../views/Orderinfo')
 const Paysuccess=()=>import('../views/Paysuccess')
+const Search=()=>import('../views/Search')
+const Selectcity=()=>import('../views/Selectcity')
 Vue.use(VueRouter)
 
 const originalPush = VueRouter.prototype.push
@@ -152,6 +154,16 @@ const routes = [
     meta: {
       isLogin: true
     }
+  },
+  {
+    path: '/search',
+    component:Search,
+    name:'Search'
+  },
+  {
+    path: '/selectcity',
+    component:Selectcity,
+    name:'Selectcity'
   }
 ]
 

@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {login,getUser} from "@/network/api";
+import {login,getUser,getLocation} from "@/network/api";
 import router from "@/router";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userInfo:{}
+    userInfo:{},
+    loactioncity:'定位中...'
   },
   mutations: {
     changeUserInfo(state,userInfo){
@@ -34,6 +35,12 @@ export default new Vuex.Store({
     },
     clearAll(state){
       state.userInfo={}
+    },
+    changeAvatar(state,avatar){
+      state.userInfo.avatar = avatar
+    },
+    changeLocations(state,city){
+      state.loactioncity = city
     }
   },
   actions: {
@@ -49,8 +56,15 @@ export default new Vuex.Store({
         const {data} = await getUser()
         context.commit('changeUserInfo',data)
       }
+    },
+    getlocation(context){
+      window.navigator.geolocation.getCurrentPosition(async postition => {
+        const {latitude,longitude} = postition.coords
+        const res = await getLocation(latitude,longitude)
+        const {city} = res.result.addressComponent
+        context.commit("changeLocations",city)
+      })
     }
-
   },
   modules: {
   }

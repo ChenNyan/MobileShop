@@ -1,4 +1,7 @@
 import {request} from "@/network/index";
+import Vue from "vue";
+import { VueJsonp } from 'vue-jsonp';
+Vue.use(VueJsonp)
 
 export const baseImg="http://192.168.0.129:8360"
 
@@ -175,5 +178,32 @@ export const getorderlist=page=>{
         params:{
             page
         }
+    })
+}
+
+export const uploadavator = avator =>{
+    return request({
+        url:'/user/avatar',
+        method:'post',
+        data:avator
+    })
+}
+
+export const searchproduct = key =>{
+    return request({
+        url:'/product/pagination',
+        params:{
+            page:1,
+            size:10,
+            key
+        }
+    })
+}
+
+export const getLocation = (latitude,longitude) => Vue.prototype.$jsonp('http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location='+latitude+','+longitude+'&output=json&pois=0')
+
+export const getcitylist = ()=>{
+    return request({
+        url:'/data/city',
     })
 }

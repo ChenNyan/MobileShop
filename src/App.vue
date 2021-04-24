@@ -6,11 +6,10 @@
   </div>
 </template>
 <script>
-import Topnav from "@/components/Topnav";
 
 export default {
   name:'App',
-  components: {Topnav},
+  components: {},
   data(){
     return {}
   },
